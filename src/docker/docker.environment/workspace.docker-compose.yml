@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+   
+  postgres_db:
+    extends:
+      file: postgres-service.yml
+      service: postgres-base
+    hostname: localhost
+    environment:
+      POSTGRES_DB: postgres_db
+    volumes:
+      - pg-data-db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+      
+volumes:
+  pg-data-db:
+
+networks:
+  default:
+    name: myLocalNetwork
+    external: true

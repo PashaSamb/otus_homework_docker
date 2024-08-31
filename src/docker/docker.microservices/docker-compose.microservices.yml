@@ -1,0 +1,22 @@
+﻿version: '3.8'
+services:     
+  
+  promocodefactory-webhost-api:
+    build: 
+      context: ../..
+      dockerfile: /Dockerfile
+    container_name: 'promocodefactory-webhost-api'
+    restart: on-failure
+    ports:
+      - "7050:8080"
+      - "5292:5000"  # порт для отладки
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080;http://+:5000
+      - POSTGRES_CONNECTION_STRING=Server=postgres_db;Port=5432;Database=postgres_db;User Id=postgres;Password=password;
+    networks:
+      - myLocalNetwork   
+      
+networks:
+  myLocalNetwork:
+    external: true
